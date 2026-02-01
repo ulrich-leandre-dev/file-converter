@@ -1,5 +1,5 @@
 // Configuration
-const API_URL = 'https://kind-cycles-lay.loca.lt/api';
+const API_URL = 'https://ulrich-api.loca.lt/api';
 const PAYSTACK_PUBLIC_KEY = 'pk_test_7a9ad8da00db0a93e3dabf0a105c09025c03cc99';
 
 // State
