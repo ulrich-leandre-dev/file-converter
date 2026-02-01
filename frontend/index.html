@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FileConvert - Convertisseur Universel</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">🔄</span>
+                <span class="logo-text">FileConvert</span>
+            </div>
+            <nav class="nav">
+                <a href="#features">Fonctionnalités</a>
+                <a href="#pricing">Prix</a>
+                <a href="#converter" class="btn-primary">Commencer</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="hero-title">Convertissez tous vos fichiers</h1>
+            <p class="hero-subtitle">Images, documents, audio, vidéo — Tous formats supportés</p>
+            <div class="hero-cta">
+                <a href="#converter" class="btn-large">Convertir maintenant → 1€</a>
+                <p class="hero-note">✓ Conversion rapide ✓ Tous formats ✓ Paiement sécurisé</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Formats supportés</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🖼️</div>
+                    <h3>Images</h3>
+                    <p>PNG, JPG, WEBP, GIF, BMP, TIFF, SVG</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📄</div>
+                    <h3>Documents</h3>
+                    <p>PDF, DOCX, TXT, HTML, MD</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎵</div>
+                    <h3>Audio</h3>
+                    <p>MP3, WAV, OGG, FLAC, M4A</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎬</div>
+                    <h3>Vidéo</h3>
+                    <p>MP4, AVI, MKV, MOV, WEBM</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <h2 class="section-title">Prix simple et transparent</h2>
+            <div class="pricing-card">
+                <div class="price-tag">1€</div>
+                <p class="price-desc">Par conversion</p>
+                <ul class="price-features">
+                    <li>✓ Tous les formats</li>
+                    <li>✓ Fichiers jusqu'à 50MB</li>
+                    <li>✓ Conversion rapide</li>
+                    <li>✓ Paiement sécurisé (Stripe)</li>
+                    <li>✓ Pas d'abonnement</li>
+                </ul>
+                <a href="#converter" class="btn-large">Essayer maintenant</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Converter Tool -->
+    <section id="converter" class="converter">
+        <div class="container">
+            <h2 class="section-title">Convertir un fichier</h2>
+            
+            <div class="converter-card">
+                <!-- Step 1: Upload -->
+                <div id="step-upload" class="step active">
+                    <div class="upload-zone" id="uploadZone">
+                        <div class="upload-icon">📁</div>
+                        <p class="upload-text">Glissez votre fichier ici ou cliquez pour sélectionner</p>
+                        <p class="upload-limit">Taille max: 50MB</p>
+                        <input type="file" id="fileInput" hidden>
+                    </div>
+                    
+                    <div id="filePreview" class="file-preview hidden">
+                        <div class="file-info">
+                            <span class="file-name" id="fileName"></span>
+                            <span class="file-size" id="fileSize"></span>
+                        </div>
+                        <button class="btn-remove" id="removeFile">✕</button>
+                    </div>
+
+                    <div id="formatSelector" class="format-selector hidden">
+                        <label for="targetFormat">Convertir vers:</label>
+                        <select id="targetFormat" class="format-select">
+                            <option value="">Choisir un format...</option>
+                        </select>
+                        <button id="proceedPayment" class="btn-large" disabled>Continuer au paiement (1€)</button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Payment (Stripe) -->
+                <div id="step-payment" class="step">
+                    <div class="payment-info">
+                        <h3>Paiement sécurisé</h3>
+                        <p>1€ pour cette conversion</p>
+                        <button id="stripePayment" class="btn-stripe">
+                            Payer avec Stripe 💳
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Processing -->
+                <div id="step-processing" class="step">
+                    <div class="processing">
+                        <div class="spinner"></div>
+                        <p>Conversion en cours...</p>
+                    </div>
+                </div>
+
+                <!-- Step 4: Download -->
+                <div id="step-download" class="step">
+                    <div class="success">
+                        <div class="success-icon">✓</div>
+                        <h3>Conversion réussie !</h3>
+                        <button id="downloadFile" class="btn-large">Télécharger le fichier</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 FileConvert. Tous droits réservés.</p>
+            <div class="footer-links">
+                <a href="#">Conditions</a>
+                <a href="#">Confidentialité</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
