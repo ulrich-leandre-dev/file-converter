@@ -4,158 +4,124 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FileConvert - Convertisseur Universel</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        /* 🚀 FileConvert V1.2 - Inlined CSS for Vercel */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #ec4899;
+            --success: #10b981;
+            --danger: #ef4444;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --border: #e2e8f0;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+            background: var(--light);
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+        .header { background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; padding: 1rem 0; }
+        .header .container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 0.5rem; font-size: 1.5rem; font-weight: 700; }
+        .nav { display: flex; gap: 2rem; align-items: center; }
+        .nav a { text-decoration: none; color: var(--dark); font-weight: 500; }
+        .btn-primary, .btn-large, .btn-stripe {
+            background: var(--primary); color: white; padding: 0.75rem 2rem; border-radius: 0.5rem;
+            text-decoration: none; font-weight: 600; border: none; cursor: pointer; display: inline-block;
+        }
+        .btn-large { padding: 1rem 2.5rem; font-size: 1.1rem; }
+        .hero { text-align: center; padding: 5rem 0; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+        .hero-title { font-size: 3.5rem; font-weight: 800; margin-bottom: 1rem; }
+        .features, .pricing, .converter { padding: 5rem 0; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
+        .feature-card { background: white; padding: 2rem; border-radius: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: center; }
+        .pricing-card { max-width: 400px; margin: 0 auto; background: white; padding: 3rem; border-radius: 1rem; text-align: center; }
+        .converter-card { background: white; padding: 3rem; border-radius: 1rem; box-shadow: 0 4px 16px rgba(0,0,0,0.1); max-width: 600px; margin: 0 auto; }
+        .upload-zone { border: 3px dashed var(--border); border-radius: 1rem; padding: 4rem 2rem; text-align: center; cursor: pointer; }
+        .hidden { display: none !important; }
+        .spinner { width: 40px; height: 40px; border: 4px solid var(--border); border-top-color: var(--primary); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .step { display: none; }
+        .step.active { display: block; }
+        .footer { background: var(--dark); color: white; padding: 3rem 0; text-align: center; }
+    </style>
     <script src="https://js.paystack.co/v1/inline.js"></script>
 </head>
 <body>
-    <!-- Header -->
     <header class="header">
         <div class="container">
-            <div class="logo">
-                <span class="logo-icon">🔄</span>
-                <span class="logo-text">FileConvert</span>
-            </div>
+            <div class="logo">🔄 FileConvert</div>
             <nav class="nav">
                 <a href="#features">Fonctionnalités</a>
-                <a href="#pricing">Prix</a>
                 <a href="#converter" class="btn-primary">Commencer</a>
             </nav>
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h1 class="hero-title">Convertissez tous vos fichiers</h1>
-            <p class="hero-subtitle">Images, documents, audio, vidéo — Tous formats supportés</p>
-            <div class="hero-cta">
-                <a href="#converter" class="btn-large">Convertir maintenant → 1€</a>
-                <p class="hero-note">✓ Conversion rapide ✓ Tous formats ✓ Paiement sécurisé</p>
-            </div>
+            <h1 class="hero-title">Convertissez vos fichiers</h1>
+            <p>Images, documents, audio, vidéo — 1€ la conversion</p>
         </div>
     </section>
 
-    <!-- Features -->
-    <section id="features" class="features">
-        <div class="container">
-            <h2 class="section-title">Formats supportés</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🖼️</div>
-                    <h3>Images</h3>
-                    <p>PNG, JPG, WEBP, GIF, BMP, TIFF, SVG</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📄</div>
-                    <h3>Documents</h3>
-                    <p>PDF, DOCX, TXT, HTML, MD</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🎵</div>
-                    <h3>Audio</h3>
-                    <p>MP3, WAV, OGG, FLAC, M4A</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🎬</div>
-                    <h3>Vidéo</h3>
-                    <p>MP4, AVI, MKV, MOV, WEBM</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pricing -->
-    <section id="pricing" class="pricing">
-        <div class="container">
-            <h2 class="section-title">Prix simple et transparent</h2>
-            <div class="pricing-card">
-                <div class="price-tag">1€</div>
-                <p class="price-desc">Par conversion</p>
-                <ul class="price-features">
-                    <li>✓ Tous les formats</li>
-                    <li>✓ Fichiers jusqu'à 50MB</li>
-                    <li>✓ Conversion rapide</li>
-                    <li>✓ Paiement sécurisé (Stripe)</li>
-                    <li>✓ Pas d'abonnement</li>
-                </ul>
-                <a href="#converter" class="btn-large">Essayer maintenant</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Converter Tool -->
     <section id="converter" class="converter">
         <div class="container">
-            <h2 class="section-title">Convertir un fichier</h2>
-            
             <div class="converter-card">
-                <!-- Step 1: Upload -->
                 <div id="step-upload" class="step active">
                     <div class="upload-zone" id="uploadZone">
-                        <div class="upload-icon">📁</div>
-                        <p class="upload-text">Glissez votre fichier ici ou cliquez pour sélectionner</p>
-                        <p class="upload-limit">Taille max: 50MB</p>
+                        <div style="font-size: 3rem;">📁</div>
+                        <p>Cliquez ou glissez votre fichier ici</p>
                         <input type="file" id="fileInput" hidden>
                     </div>
-                    
-                    <div id="filePreview" class="file-preview hidden">
-                        <div class="file-info">
-                            <span class="file-name" id="fileName"></span>
-                            <span class="file-size" id="fileSize"></span>
-                        </div>
-                        <button class="btn-remove" id="removeFile">✕</button>
+                    <div id="filePreview" class="hidden" style="margin-top: 20px; padding: 15px; background: #f1f5f9; border-radius: 8px;">
+                        <span id="fileName" style="font-weight: bold;"></span>
                     </div>
-
-                    <div id="formatSelector" class="format-selector hidden">
-                        <label for="targetFormat">Convertir vers:</label>
-                        <select id="targetFormat" class="format-select">
-                            <option value="">Choisir un format...</option>
+                    <div id="formatSelector" class="hidden" style="margin-top: 20px;">
+                        <select id="targetFormat" style="width: 100%; padding: 10px; margin-bottom: 20px;">
+                            <option value="">Choisir format...</option>
                         </select>
-                        <button id="proceedPayment" class="btn-large" disabled>Continuer au paiement (1€)</button>
+                        <button id="proceedPayment" class="btn-large" style="width: 100%;">Continuer au paiement (650 FCFA)</button>
                     </div>
                 </div>
-
-                <!-- Step 2: Payment (Stripe) -->
                 <div id="step-payment" class="step">
-                    <div class="payment-info">
-                        <h3>Paiement sécurisé</h3>
-                        <p>1€ pour cette conversion</p>
-                        <button id="stripePayment" class="btn-stripe">
-                            Payer avec Stripe 💳
-                        </button>
+                    <div style="text-align: center;">
+                        <h3>Paiement sécurisé Paystack</h3>
+                        <button id="stripePayment" class="btn-primary" style="margin-top: 20px;">Payer maintenant 💳</button>
                     </div>
                 </div>
-
-                <!-- Step 3: Processing -->
                 <div id="step-processing" class="step">
-                    <div class="processing">
-                        <div class="spinner"></div>
-                        <p>Conversion en cours...</p>
-                    </div>
+                    <div class="spinner"></div>
+                    <p style="text-align: center; margin-top: 10px;">Conversion en cours...</p>
                 </div>
-
-                <!-- Step 4: Download -->
                 <div id="step-download" class="step">
-                    <div class="success">
-                        <div class="success-icon">✓</div>
-                        <h3>Conversion réussie !</h3>
-                        <button id="downloadFile" class="btn-large">Télécharger le fichier</button>
+                    <div style="text-align: center;">
+                        <h3>✅ Terminé !</h3>
+                        <button id="downloadFile" class="btn-large" style="margin-top: 20px;">Télécharger</button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
+    <section id="features" class="features">
         <div class="container">
-            <p>&copy; 2026 FileConvert. Tous droits réservés.</p>
-            <div class="footer-links">
-                <a href="#">Conditions</a>
-                <a href="#">Confidentialité</a>
-                <a href="#">Contact</a>
+            <div class="features-grid">
+                <div class="feature-card">🖼️ Images</div>
+                <div class="feature-card">📄 Documents</div>
+                <div class="feature-card">🎵 Audio</div>
+                <div class="feature-card">🎬 Vidéo</div>
             </div>
         </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2026 FileConvert</p>
     </footer>
 
     <script src="app.js"></script>
