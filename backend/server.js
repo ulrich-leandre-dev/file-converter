@@ -4,10 +4,22 @@ const multer = require('multer');
 const axios = require('axios');
 const path = require('path');
 const fs = require('fs').promises;
+const nodemailer = require('nodemailer');
 require('dotenv').config();
 
 const app = express();
 const PAYSTACK_SECRET_KEY = process.env.PAYSTACK_SECRET_KEY;
+
+// Configuration Email (Nodemailer)
+const transporter = nodemailer.createTransport({
+  host: process.env.SMTP_HOST,
+  port: process.env.SMTP_PORT,
+  secure: process.env.SMTP_PORT == 465,
+  auth: {
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
+  },
+});
 
 // Middleware
 app.use(cors());
@@ -124,6 +136,23 @@ app.post('/api/convert', upload.single('file'), async (req, res) => {
 
     const converter = require('./converters');
     await converter.convert(inputPath, outputPath, targetFormat);
+
+    // ENVOI PAR EMAIL
+    const userEmail = response.data.data.customer.email;
+    const mailOptions = {
+      from: `"FileConvert" <${process.env.SMTP_USER}>`,
+      to: userEmail,
+      subject: "✅ Votre fichier est prêt ! - FileConvert",
+      text: `Bonjour ! Merci pour votre confiance. Vous trouverez ci-joint votre fichier converti en ${targetFormat}. À bientôt sur FileConvert !`,
+      attachments: [{ filename: `file-convertie.${targetFormat}`, path: outputPath }]
+    };
+
+    try {
+      await transporter.sendMail(mailOptions);
+      console.log(`📧 Mail envoyé à ${userEmail}`);
+    } catch (mailErr) {
+      console.error("❌ Erreur envoi mail:", mailErr);
+    }
 
     res.download(outputPath, async (err) => {
       await fs.unlink(inputPath).catch(() => {});
