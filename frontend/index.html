@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FileConvert - Convertisseur Universel</title>
     <style>
-        /* 🚀 FileConvert V1.3 - Final All-in-One Build */
+        /* 🚀 FileConvert V1.4 - Final Production Build */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --primary: #6366f1;
@@ -65,7 +65,7 @@
     <section class="hero">
         <div class="container">
             <h1 class="hero-title">Convertissez vos fichiers</h1>
-            <p>Images, documents, audio, vidéo — 650 FCFA la conversion</p>
+            <p>Images, documents, audio, vidéo — 50 FCFA la conversion</p>
         </div>
     </section>
 
@@ -85,13 +85,13 @@
                         <select id="targetFormat" style="width: 100%; padding: 10px; margin-bottom: 20px;">
                             <option value="">Choisir format...</option>
                         </select>
-                        <button id="proceedPayment" class="btn-large" style="width: 100%;">Continuer au paiement (650 FCFA)</button>
+                        <button id="proceedPayment" class="btn-large" style="width: 100%;">Continuer au paiement (50 FCFA)</button>
                     </div>
                 </div>
                 <div id="step-payment" class="step">
                     <div style="text-align: center;">
                         <h3>Paiement sécurisé Paystack</h3>
-                        <p style="margin-top: 10px;">Le montant est de 650 FCFA</p>
+                        <p style="margin-top: 10px;">Le montant est de 50 FCFA</p>
                         <button id="paystackPayment" class="btn-primary" style="margin-top: 20px;">Payer maintenant 💳</button>
                     </div>
                 </div>
@@ -125,8 +125,8 @@
     </footer>
 
     <script>
-        // Configuration
-        const API_URL = 'https://ulrich-api.loca.lt/api';
+        // Configuration stable via Render
+        const API_URL = 'https://file-converter-db2t.onrender.com/api';
         const PAYSTACK_PUBLIC_KEY = 'pk_live_c509b18c8341e7e214028a957f6a8cd0c19d86a7';
 
         // State
@@ -188,13 +188,13 @@
         };
 
         paystackPaymentBtn.onclick = () => {
-            const email = prompt("Entrez votre email pour le reçu:", "client@example.com");
+            const email = prompt("Entrez votre email pour recevoir le fichier :", "client@example.com");
             if (!email) return;
 
             const handler = PaystackPop.setup({
                 key: PAYSTACK_PUBLIC_KEY,
                 email: email,
-                amount: 65000, // 650 XOF
+                amount: 5000, // 50 XOF
                 currency: 'XOF',
                 ref: 'FC-' + Math.floor((Math.random() * 1000000000) + 1),
                 callback: function(response) {
@@ -215,7 +215,7 @@
             
             try {
                 const res = await fetch(`${API_URL}/convert`, { method: 'POST', body: formData });
-                if (!res.ok) throw new Error('Erreur serveur');
+                if (!res.ok) throw new Error('Erreur serveur lors de la conversion');
                 const blob = await res.blob();
                 const url = window.URL.createObjectURL(blob);
                 downloadFileBtn.onclick = () => {

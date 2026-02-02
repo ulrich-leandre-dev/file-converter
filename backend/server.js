@@ -48,8 +48,8 @@ app.post('/api/create-checkout-session', async (req, res) => {
     
     const response = await axios.post('https://api.paystack.co/transaction/initialize', {
       email: email || 'customer@example.com',
-      amount: 65000, // ~1€ en FCFA (Paystack utilise les kobo/centimes, donc 650.00 XOF)
-      currency: 'XOF',
+        amount: 5000, // 50 XOF (Paystack utilise les kobo/centimes, donc 5000 = 50.00 XOF)
+        currency: 'XOF',
       callback_url: `${process.env.CLIENT_URL}/success`,
       metadata: {
         custom_fields: [
