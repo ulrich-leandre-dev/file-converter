@@ -188,8 +188,22 @@
         };
 
         paystackPaymentBtn.onclick = () => {
-            const email = prompt("Entrez votre email pour recevoir le fichier :", "client@example.com");
+            let email = prompt("Entrez votre email pour recevoir le fichier :", "client@example.com");
             if (!email) return;
+
+            // Validation email simple
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            while (email && !emailRegex.test(email)) {
+                email = prompt("Email invalide. Veuillez entrer un email correct :", email);
+            }
+            if (!email) return;
+
+            // Vérification taille fichier (50MB)
+            if (selectedFile.size > 50 * 1024 * 1024) {
+                alert("Le fichier est trop volumineux (max 50MB). Veuillez choisir un autre fichier.");
+                showStep('step-upload');
+                return;
+            }
 
             const handler = PaystackPop.setup({
                 key: PAYSTACK_PUBLIC_KEY,
